@@ -30,17 +30,24 @@ app.get('/', (req, res, next) => {
     });
 
 
-  app.get('/applist.html', (req,res) => {
-      if(req.accepted){client.connect(err=>{
-        collection.findOne({}, function(err, result){
-          if(err) {console.log(err);}
-          if(result){console.log(result);}
-          else{console.log("nope");}
-        });
-      
-    });
-  }
+  app.get('/applist', (req,res) => {
+   
+      client.connect( async err=>{
+        if(err) throw err;
+       await collection.find({name:'Coleman'});
+       res.send('it works');
+          
+      });
+    
   });
+      
+        // collection.findOne({}, function(err, result){
+        //   if(err) {console.log(err);}
+        //   if(result){console.log(result);}
+        //   else{console.log("nope");}
+        // });
+      
+
 
 
 app.post('/test', (req, res) => {

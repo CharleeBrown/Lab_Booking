@@ -17,21 +17,13 @@
                 </td>
             </tr>
         </table>
+        <form action="/applist">
+        <input type="submit"/>
+    </form>
 </body>
 
 <script>
-    const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://lee:Gamez2232@cluster0.guc9f.mongodb.net/mainDB?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const collection = client.db("mainDB").collection("CalLabBooking");
-    function runquery(){
-        client.connect(err=>{
-      const cursor = collection.find({});
-        cursor.forEach({
-         function(doc){
-           console.log(doc.name);
-         }
-        });
-    }
+
+
 </script>
 </html>
