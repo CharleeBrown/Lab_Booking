@@ -32,7 +32,7 @@ app.post('/test', (req, res) => {
       collection.insertOne(obj);
       console.log("Test Success!");
           }
-res.sendfile(index.html);
+res.redirect('/');
 client.close();
 });
 });
