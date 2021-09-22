@@ -16,14 +16,10 @@ app.use(express.static('public'));
 
 
 app.get('/', (req, res) => {
-
   res.send('Hello');
-  console.log(req.body);
 });
 
-// app.post('/', (req, res, next) => {
-//  app.use(express.static('otherPublic'));
-// });
+
 
 app.post('/test', (req, res, next) => {
   
@@ -35,24 +31,13 @@ app.post('/test', (req, res, next) => {
       let obj = {Name:"COOL!", Date:new Date(req.body.dates).toDateString()};
       collection.insertOne(obj);
       console.log("Test Success!");
-    
-    };
-    
-});
+          }
+next();
 client.close();
-  res.send('date: ' + req.body.dates);
-  
-  //console.log(req.body);
-  //res.send('Successful');
-  //fs.ReadStream('otherPublic/index2.html');
-
-  
 });
 
 
-
-
-app.listen(3000, function(){
+app.listen(process.env.PORT||3000, function(){
   console.log('listening on port 3000');
 });
 
