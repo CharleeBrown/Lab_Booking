@@ -6,7 +6,10 @@ const multer = require('multer');
 const upload = multer();
 const express = require('express'); 
 const app = express();
-
+const collection = client.db("mainDB").collection("CalLabBooking");
+function get_results (result) {
+  print(tojson(result));
+}
 
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
@@ -14,53 +17,47 @@ app.use(upload.array());
 
 app.use(express.static('public'));
 
+               
+function getResults(){
+  client.connect();
+  let docs = collection.findOne({});
+  if(docs){
+    console.log(docs.name);
+  }
+  client.close();
+}
 
-app.get('/', (req, res) => {
-  res.send('Hello');
-});
 
+app.get('/', (req, res, next) => {
+  //console.log(collection.find());
+ //client.close();
+ next();
+ });
+ 
+  
+  app.post('/apptlist.html', (req, res) => {
+    console.log('SUCCESS');
+    });
+    app.get('/applist.html', (req,res) => {
+      res.json(getResults());
+      console.log('nope');
+    });
 
 
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
+      client.connect(err => {
+                let obj = {name:req.body.userName, 
+                          bookDate:new Date(req.body.dates).toDateString(), 
+                          startTime:req.body.startTime, 
+                          stopTime:req.body.leaveTime};
+                collection.insertOne(obj);       
+                res.redirect('/apptlist.html');
+                                     });
+                client.close();
+                                   }
+                                        });
 
-  
-  client.connect(err => {
-    if(err == null){
-      const collection = client.db("mainDB").collection("CalLabBooking");
-      // perform actions on the collection object
-      
-      let obj = {name:req.body.userName, 
-                bookDate:new Date(req.body.dates).toDateString(), 
-                startTime:req.body.startTime, 
-                stopTime:req.body.leaveTime};
-      collection.insertOne(obj);
-      // if(client.getLogger().isError){
-      //   console.log(client.messages.error);
-      // }
-          }
-res.redirect('/');
-
-client.close();
-});
-  }
-  else{
-    res.redirect('/');
-    alert('empty information');
-  }
-});
-
-
-app.listen(process.env.PORT||3000, function(){
-  console.log('listening on port 3000');
-});
-
-
-
-
-
-
-
-
-
-
+                                        app.listen(process.env.PORT||3000, function(){
+                                          console.log('listening on port 3000');
+                                        });
