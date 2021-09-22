@@ -26,7 +26,7 @@ app.use(express.json);
 
 
   app.get('applist.html', (req,res) => {
-    
+    res.send('test');
     // client.connect(err=>{
     //   if(err)throw err;
     //   const cursor = collection.find({});
