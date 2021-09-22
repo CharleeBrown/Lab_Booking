@@ -25,10 +25,6 @@ app.get('/', (req, res, next) => {
  });
  
   
-  app.post('/apptlist.html', (req, res) => {
-    console.log('SUCCESS');
-    });
-
 
   app.get('applist.html', (req,res) => {
     req.body.
