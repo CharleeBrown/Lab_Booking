@@ -27,7 +27,7 @@ app.get('/', (req, res, next) => {
   
 
   app.get('applist.html', (req,res) => {
-    req.body.
+    
     client.connect(err=>{
       const cursor = collection.find({});
         cursor.forEach({
