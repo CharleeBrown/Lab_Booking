@@ -35,6 +35,7 @@ app.post('/test', (req, res, next) => {
 next();
 client.close();
 });
+});
 
 
 app.listen(process.env.PORT||3000, function(){
