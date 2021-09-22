@@ -28,7 +28,7 @@ app.post('/test', (req, res) => {
       const collection = client.db("mainDB").collection("calLab");
       // perform actions on the collection object
       
-      let obj = {Name:"COOL!", Date:new Date(req.body.dates).toDateString()};
+      let obj = {Name:"test", Date:new Date(req.body.dates).toDateString()};
       collection.insertOne(obj);
       console.log("Test Success!");
           }
