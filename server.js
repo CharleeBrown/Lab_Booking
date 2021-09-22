@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://lee:**@cluster0.guc9f.mongodb.net/mainDB?retryWrites=true&w=majority";
+const uri = "mongodb+srv://lee:Gamez2232@cluster0.guc9f.mongodb.net/mainDB?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const parser = require('body-parser');
 const multer = require('multer');
