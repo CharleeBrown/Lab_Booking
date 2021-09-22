@@ -35,9 +35,9 @@ app.post('/test', (req, res) => {
                 startTime:req.body.startTime, 
                 stopTime:req.body.leaveTime};
       collection.insertOne(obj);
-      if(client.getLogger().isError){
-        console.log(client.getLogger().getErrorMessage());
-      }
+      // if(client.getLogger().isError){
+      //   console.log(client.messages.error);
+      // }
           }
 res.redirect('/');
 
