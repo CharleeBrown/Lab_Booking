@@ -7,40 +7,38 @@ const upload = multer();
 const express = require('express'); 
 const app = express();
 const collection = client.db("mainDB").collection("CalLabBooking");
-function get_results (result) {
-  print(tojson(result));
-}
+
 
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
 
 app.use(express.static('public'));
-
-               
-function getResults(){
-  client.connect(err=>{
-    collection.findOne({});
-  });
-
-  client.close();
-}
+app.use(express.json);
 
 
-app.get('/', (req, res, next) => {
-  //console.log(collection.find());
- //client.close();
- next();
- });
- 
+
+
   
-  app.post('/apptlist.html', (req, res) => {
-    console.log('SUCCESS');
-    });
-    app.get('/applist.html', (req,res) => {
-      res.json(getResults());
-      console.log('nope');
-    });
+  // app.post('/apptlist.html', (req, res) => {
+  //   console.log('SUCCESS');
+  //   });
+
+
+  app.get('applist.html', (req,res) => {
+    
+    // client.connect(err=>{
+    //   if(err)throw err;
+    //   const cursor = collection.find({});
+    //     cursor.forEach({
+    //      function(doc){
+    //        console.log(doc.name);
+    //      }
+    //     });
+      
+    // });
+  
+  });
 
 
 app.post('/test', (req, res) => {
@@ -53,10 +51,17 @@ app.post('/test', (req, res) => {
                 collection.insertOne(obj);       
                 res.redirect('/apptlist.html');
                                      });
-                client.close();
-                                   }
-                                        });
+      client.close();
+}
+});
 
-                                        app.listen(process.env.PORT||3000, function(){
-                                          console.log('listening on port 3000');
-                                        });
+app.get('/', (req, res, next) => {
+  //console.log(collection.find());
+ //client.close();
+ next();
+ });
+ 
+
+app.listen(process.env.PORT||3000, function(){
+console.log('listening on port 3000');
+});
