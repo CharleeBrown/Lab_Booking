@@ -14,30 +14,32 @@ app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
 
 app.use(express.static('public'));
-//app.use(express.json);
+
 
 
 
 app.get('/', (req, res, next) => {
   //console.log(collection.find());
  //client.close();
- 
+ next();
  });
  
   
+  app.post('/apptlist.html', (req, res) => {
+    console.log('SUCCESS');
+    });
 
-  app.get('applist.html', (req,res) => {
-    
-    client.connect(err=>{
-      const cursor = collection.find({});
-        cursor.forEach({
-         function(doc){
-           console.log(doc.name);
-         }
+
+  app.get('/applist.html', (req,res) => {
+      if(req.accepted){client.connect(err=>{
+        collection.findOne({}, function(err, result){
+          if(err) {console.log(err);}
+          if(result){console.log(result);}
+          else{console.log("nope");}
         });
       
     });
-  
+  }
   });
 
 
@@ -49,12 +51,12 @@ app.post('/test', (req, res) => {
                           startTime:req.body.startTime, 
                           stopTime:req.body.leaveTime};
                 collection.insertOne(obj);       
-                    //res.redirect('/apptlist.html');
+                res.redirect('/apptlist.html');
                                      });
-      client.close();
-}
-});
-
+                client.close();
+                                   }
+                                        });
+                                        
 app.listen(process.env.PORT||3000, function(){
 console.log('listening on port 3000');
 });
