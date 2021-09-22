@@ -18,31 +18,29 @@ app.use(express.json);
 
 
 
-
-  
 app.get('/', (req, res, next) => {
   //console.log(collection.find());
  //client.close();
  next();
  });
  
-  // app.post('/apptlist.html', (req, res) => {
-  //   console.log('SUCCESS');
-  //   });
+  
+  app.post('/apptlist.html', (req, res) => {
+    console.log('SUCCESS');
+    });
 
 
   app.get('applist.html', (req,res) => {
-    res.send('test');
-    // client.connect(err=>{
-    //   if(err)throw err;
-    //   const cursor = collection.find({});
-    //     cursor.forEach({
-    //      function(doc){
-    //        console.log(doc.name);
-    //      }
-    //     });
+    req.body.
+    client.connect(err=>{
+      const cursor = collection.find({});
+        cursor.forEach({
+         function(doc){
+           console.log(doc.name);
+         }
+        });
       
-    // });
+    });
   
   });
 
@@ -50,7 +48,6 @@ app.get('/', (req, res, next) => {
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
       client.connect(err => {
-          if(err) throw err;
                 let obj = {name:req.body.userName, 
                           bookDate:new Date(req.body.dates).toDateString(), 
                           startTime:req.body.startTime, 
@@ -61,7 +58,6 @@ app.post('/test', (req, res) => {
       client.close();
 }
 });
-
 
 app.listen(process.env.PORT||3000, function(){
 console.log('listening on port 3000');
