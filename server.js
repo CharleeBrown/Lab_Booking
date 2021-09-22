@@ -20,6 +20,12 @@ app.use(express.json);
 
 
   
+app.get('/', (req, res, next) => {
+  //console.log(collection.find());
+ //client.close();
+ next();
+ });
+ 
   // app.post('/apptlist.html', (req, res) => {
   //   console.log('SUCCESS');
   //   });
@@ -44,6 +50,7 @@ app.use(express.json);
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
       client.connect(err => {
+          if(err) throw err;
                 let obj = {name:req.body.userName, 
                           bookDate:new Date(req.body.dates).toDateString(), 
                           startTime:req.body.startTime, 
@@ -55,12 +62,6 @@ app.post('/test', (req, res) => {
 }
 });
 
-app.get('/', (req, res, next) => {
-  //console.log(collection.find());
- //client.close();
- next();
- });
- 
 
 app.listen(process.env.PORT||3000, function(){
 console.log('listening on port 3000');
