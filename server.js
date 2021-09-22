@@ -34,10 +34,13 @@ app.post('/test', (req, res) => {
                 bookDate:new Date(req.body.dates).toDateString(), 
                 startTime:req.body.startTime, 
                 stopTime:req.body.leaveTime};
-      collection.insertOne(obj);
+      collection.insertOne(err, obj=>{
+        console.log(obj.message);
+      });
       console.log("Test Success!");
           }
 res.redirect('/');
+
 client.close();
 });
   }
