@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
 
 
 
-app.post('/test', (req, res, next) => {
+app.post('/test', (req, res) => {
   
   client.connect(err => {
     if(err == null){
@@ -32,7 +32,7 @@ app.post('/test', (req, res, next) => {
       collection.insertOne(obj);
       console.log("Test Success!");
           }
-next();
+res.sendfile(index.html);
 client.close();
 });
 });
