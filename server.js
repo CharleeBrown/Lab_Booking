@@ -19,11 +19,10 @@ app.use(express.static('public'));
 
                
 function getResults(){
-  client.connect();
-  let docs = collection.findOne({});
-  if(docs){
-    console.log(docs.name);
-  }
+  client.connect(err=>{
+    collection.findOne({});
+  });
+
   client.close();
 }
 
