@@ -14,14 +14,14 @@ app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
 
 app.use(express.static('public'));
-app.use(express.json);
+//app.use(express.json);
 
 
 
 app.get('/', (req, res, next) => {
   //console.log(collection.find());
  //client.close();
- next();
+ 
  });
  
   
@@ -53,7 +53,7 @@ app.post('/test', (req, res) => {
                           startTime:req.body.startTime, 
                           stopTime:req.body.leaveTime};
                 collection.insertOne(obj);       
-                res.redirect('/apptlist.html');
+                    //res.redirect('/apptlist.html');
                                      });
       client.close();
 }
