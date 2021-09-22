@@ -22,19 +22,29 @@ app.get('/', (req, res) => {
 
 
 app.post('/test', (req, res) => {
+  if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
+
   
   client.connect(err => {
     if(err == null){
-      const collection = client.db("mainDB").collection("calLab");
+      const collection = client.db("mainDB").collection("CalLabBooking");
       // perform actions on the collection object
       
-      let obj = {Name:"test", Date:new Date(req.body.dates).toDateString()};
+      let obj = {name:req.body.userName, 
+                bookDate:new Date(req.body.dates).toDateString(), 
+                startTime:req.body.startTime, 
+                stopTime:req.body.leaveTime};
       collection.insertOne(obj);
       console.log("Test Success!");
           }
 res.redirect('/');
 client.close();
 });
+  }
+  else{
+    res.redirect('/');
+    alert('empty information');
+  }
 });
 
 
