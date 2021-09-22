@@ -5,13 +5,9 @@ const parser = require('body-parser');
 const multer = require('multer');
 const upload = multer();
 const express = require('express'); 
-const fs = require('fs');
 const app = express();
 
-app.use((req, res, next)=>{
-  console.log('Time: ', Date.now());
-  next();
-});
+
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
