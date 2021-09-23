@@ -25,16 +25,24 @@
 <script>
 function getData(){
 
-    fetch('https://lab-booking.herokuapp.com/applist?')
-    .then(response => {
-        // handle the response
-        console.log(response.body);
-        let docs = document.getElementById('test'); 
-        docs.innerText = response[0].name;
-    })
-    .catch(error => {
-        // handle the error
-    });
+    let xht = new XMLHttpRequest();
+    xht.onreadystatechange = function(){
+        if(this.readyState == 4&& this.status == 200){
+            document.getElementById('test').innerHTML = this.responseText;
+        }
+    }
+    xht.open('GET','/applist', true);
+    xht.send();
+    // fetch('https://lab-booking.herokuapp.com/applist?')
+    // .then(response => {
+    //     // handle the response
+    //     console.log(response.body);
+    //     let docs = document.getElementById('test'); 
+    //     docs.innerText = response[0].name;
+    // })
+    // .catch(error => {
+    //     // handle the error
+    // });
 }
 
 
