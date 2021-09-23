@@ -17,6 +17,8 @@ app.use(express.static('public'));
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/applist.html');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
   next();
 })
 
