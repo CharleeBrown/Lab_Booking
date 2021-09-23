@@ -9,7 +9,7 @@
 <body onload="getData()">
         <table style="border: black solid 2px;">
             <tr>
-                <td>
+                <td id="test">
                         Test
                 </td>
                 <td>
@@ -29,11 +29,14 @@ function getData(){
     .then(response => {
         // handle the response
         console.log(response.body);
+        let docs = document.getElementById('test'); 
+        docs.innerText = response[0].name;
     })
     .catch(error => {
         // handle the error
     });
 }
+
 
 </script>
 </html>
