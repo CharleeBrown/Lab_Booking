@@ -1,7 +1,34 @@
+:root{/* CSS HEX */
+--royal-blue-dark: #222a68ff;
+--iceberg: #84acceff;
+--gainsboro: #e2dfdfff;
+--white: #ffffffff;
+}
+
+body{
+    background-color: var(--gainsboro);
+}
 label{
     padding:10px;
     margin:10px;
+   
+    color:white;
 }
 label input{
     margin-left: 10px;
+    
+}
+table{
+    background-color:var(--royal-blue-dark);
+    /* border:white, 2px, solid; */
+    color:var(--gainsboro);
+}
+form{
+    background-color:var(--royal-blue-dark);
+    padding:30px;
+}
+
+#mainCol{
+margin:0 auto;
+text-align: center;
 }

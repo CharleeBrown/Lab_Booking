@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">    
     <title>Document</title>
 </head>
 <body onload="getData('/applist?', setData)">
-        <table style="border: black solid 2px;" name="regtable" id='tbl'>
-            <tr>
-                <td id="test">
-                        Test
-                </td>
-                <td id="othertest">
-                    Other
-                </td>
+        <table style="border: white solid 2px; border-collapse:collapse;" name="regtable" id='tbl'>
+            <tr style="border: white solid 2px; border-collapse:collapse;">
+                <th id="test">
+                        Name
+                </th>
+                <th >
+                    Date
+                </th>
+                <th>
+                    Start Time
+                </th>
+                <th>
+                    Stop Time
+                </th>
             </tr>
         </table>
         
@@ -25,18 +32,39 @@
 <script>
     
     function setData(sets){
-      
+        let data = sets.responseText;
+            let jsonres = JSON.parse(data);   
+        for(let i=0; i<jsonres.length; i++){ 
            let tbl = document.getElementById('tbl');
-           let tds = document.createElement('td');
-           let tdd = document.createElement('td');
+           let trr = document.createElement('tr');// The multiple rows
+           let nameCell = document.createElement('td'); 
+          let dateCell = document.createElement('td');
+          let startCell = document.createElement('td');
+          let stopCell = document.createElement('td');
            
-           let name = document.createTextNode(sets.name)
-           let dates = document.createTextNode(sets.bookDate)
+            //console.log('break');
+            //console.log(jsonres[i]["name"]);
+           let name = document.createTextNode(jsonres[i]["name"])
+           let dates = document.createTextNode(jsonres[i]['bookDate'].toLocaleString())
+           let start = document.createTextNode(jsonres[i]['startTime'])
+           let stop = document.createTextNode(jsonres[i]['stopTime'])
+        
+           nameCell.appendChild(name);
+           dateCell.appendChild(dates);
+           startCell.appendChild(start);
+           stopCell.appendChild(stop);
+            trr.appendChild(nameCell);
+            trr.appendChild(dateCell);
+            trr.appendChild(startCell);
+            trr.appendChild(stopCell);
 
-           tds.appendChild(name);
-           tdd.appendChild(dates)
-           tbl.appendChild(tds);
-          
+            //tbl.appendChild(nameCell);
+           tbl.append(trr);
+           //tbl.appendChild(tdd);
+        }
+          //console.log(sets.body.length)
+          console.log(sets)
+          console.log(data);
        
         // document.getElementById('test').innerHTML = sets.response;
         // console.log(sets)

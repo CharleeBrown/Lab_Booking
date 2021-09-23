@@ -9,6 +9,7 @@ const app = express();
 const collection = client.db("mainDB").collection("CalLabBooking");
 
 
+
 app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
@@ -47,6 +48,7 @@ app.get('/', (req, res, next) => {
         const query = {};
 
 return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0}) 
+  .sort()
   .toArray()
   .then(items => {
   //   console.log(`Successfully found ${items.length} documents.`)
@@ -78,14 +80,26 @@ return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0})
       
 
 
-
+        function formatAMPM(date) {
+          var dates = new Date(date);
+          var options = {
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+          };
+          let timeString = dates.toLocaleString('en-US', options);
+          return timeString;
+        }
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
       client.connect(err => {
+        
+               
                 let obj = {name:req.body.userName, 
                           bookDate:new Date(req.body.dates).toDateString(), 
-                          startTime:req.body.startTime, 
-                          stopTime:req.body.leaveTime};
+                          startTime:formatAMPM(req.body.startTime), 
+                          stopTime:formatAMPM(req.body.leaveTime)};
+                          console.log(obj.startTime);
                 collection.insertOne(obj);       
                 res.redirect('/apptlist.html');
                                      });

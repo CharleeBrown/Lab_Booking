@@ -5,43 +5,52 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="style.css">    
     <title>Document</title>
 </head>
-<body onload="clearAll()">
+<body onload="getTime()">
     <div class="row">
+      
         <a href="/apptlist.html" > List</a>
-            <div class="col-lg-6">
+            <div class="col-lg-6" id="mainCol" >
                 <form action="/test" method="post" id="mainForm">
                 <label>Enter your name: <input type="text" name="userName" placeholder="Enter your name"/></label>
-                <label>Choose a date<input type="date" id="labDate" name="dates"/></label>
+                <label>Choose a date<input type="text" id="labDate" name="dates"/></label><br/>
                 <label>Choose a start time<input type="time" id="startTime" name="startTime"/></label>
-                <label>Choose a leave time<input type="time" id="leaveTime" name="leaveTime"/></label>
-                <input type="submit" id="saveTime" value="set appointment" onclick="checkTime()"/>
+                
+                <label>Choose a leave time<input type="time" id="leaveTime" name="leaveTime"/></label><br/>
+                <input  type="submit" id="saveTime" value="set appointment" onclick="checkTime()"/>
                 </form>
+                <hr/>
+                <span style="color:black; text-align:center;">Dept 31. Inc.</span>
             </div>
 
     </div>
+   
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
-  
-function checkTime(){  
-    let startDate = document.getElementById("mainForm").startTime.value;
-    let stopDate = document.getElementById("mainForm").leaveTime.value;
-  
-//    console.log(1);
-//    console.log(2);
-//    console.log(startDate);
-//    console.log(stopDate);
+    flatpickr("#labDate",{
+    enableTime: true,
+    dateFormat: "Y-m-d "
+});
+flatpickr("#leaveTime",{
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: false
+});
+flatpickr("#startTime",{
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: false
+});
 
-};
-
-
-    
-
-    // function clearAll(){
-    //   let form = document.getElementById("mainForm");
-    //   form.reset();
-    // }
+//   $("#basicDate").flatpickr({
+//       enableTime: true,
+//       dateFormat: "F, d Y H:i"
+//   });
 </script>
 </html>
