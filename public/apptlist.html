@@ -6,32 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body onload="getData()">
-        <table style="border: black solid 2px;">
+<body onload="getData('/applist?', setData)">
+        <table style="border: black solid 2px;" name="regtable">
             <tr>
                 <td id="test">
                         Test
                 </td>
-                <td>
+                <td id="othertest">
                     Other
                 </td>
             </tr>
         </table>
-        <form action="/applist">
-        <input type="submit"/>
-    </form>
+        
+        <input type="submit" />
+    
 </body>
 
 <script>
-function getData(){
+    
+    function setData(sets){
+
+       
+        document.getElementById('test').innerHTML = sets.response;
+        console.log(sets)
+        console.log(sets.response.type);
+        console.log(sets.responseText);
+        let table = document.getElementById('regtable')
+
+    }
+function getData(url, func){
 
     let xht = new XMLHttpRequest();
     xht.onreadystatechange = function(){
+        
         if(this.readyState == 4&& this.status == 200){
-            document.getElementById('test').innerHTML = this.responseText;
+            func(this);
         }
     }
-    xht.open('GET','/applist', true);
+    
+    xht.open('GET',url, true);
     xht.send();
     // fetch('https://lab-booking.herokuapp.com/applist?')
     // .then(response => {
