@@ -47,7 +47,6 @@ app.get('/', (req, res, next) => {
         const query = {};
 
 return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0}) 
-  .sort()
   .toArray()
   .then(items => {
   //   console.log(`Successfully found ${items.length} documents.`)
@@ -56,7 +55,7 @@ return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0})
   //  let checks = items[0].bookDate
   // console.log(checks);
   
-    res.send(items[2].name)
+    res.send(items)
   
   //res.send(checks[0])
   // items.forEach(res.send(JSON.parse(items)));

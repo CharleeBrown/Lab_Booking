@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body onload="getData('/applist?', setData)">
-        <table style="border: black solid 2px;" name="regtable">
+        <table style="border: black solid 2px;" name="regtable" id='tbl'>
             <tr>
                 <td id="test">
                         Test
@@ -25,13 +25,24 @@
 <script>
     
     function setData(sets){
+      
+           let tbl = document.getElementById('tbl');
+           let tds = document.createElement('td');
+           let tdd = document.createElement('td');
+           
+           let name = document.createTextNode(sets.name)
+           let dates = document.createTextNode(sets.bookDate)
 
+           tds.appendChild(name);
+           tdd.appendChild(dates)
+           tbl.appendChild(tds);
+          
        
-        document.getElementById('test').innerHTML = sets.response;
-        console.log(sets)
-        console.log(sets.response.type);
-        console.log(sets.responseText);
-        let table = document.getElementById('regtable')
+        // document.getElementById('test').innerHTML = sets.response;
+        // console.log(sets)
+        // console.log(sets.response.type);
+        // console.log(sets.responseText);
+        
 
     }
 function getData(url, func){
