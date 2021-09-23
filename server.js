@@ -14,12 +14,16 @@ app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
 
 app.use(express.static('public'));
-
+app.use(function(req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET');
+  next();
+})
 
 
 
 app.get('/', (req, res, next) => {
-  //console.log(collection.find());
+  //console.log(collection.find());x`
  //client.close();
  next();
  });
@@ -32,10 +36,32 @@ app.get('/', (req, res, next) => {
 
   app.get('/applist', (req,res) => {
    
+    
       client.connect( async err=>{
-        if(err) throw err;
-       await collection.find({name:'Coleman'});
-       res.send('it works');
+      //   if(err) throw err;
+      //  collection.find({ name: 'Coleman' });
+      //  res.send('it works');
+
+       const query = { "name": "naruto" };
+
+return collection.find(query)
+  .sort()
+  .toArray()
+  .then(items => {
+    console.log(`Successfully found ${items.length} documents.`)
+    console.log(items[0].bookDate)
+   // res.send(items[0].name)
+   let checks = items[0].bookDate
+  console.log(checks);
+  res.json({name:items[0].name})
+  //res.send(checks[0])
+  // items.forEach(res.send(JSON.parse(items)));
+  // items.forEach(res.send('<BODY> <h1>' + items[tems]+'</h1></BODY></HTML>'))
+   // res.send('<BODY> <h1>' + items[0].bookDate+'</h1></BODY></HTML>')
+    
+    return items
+  })
+  .catch(err => console.error(`Failed to find documents: ${err}`))
           
       });
     
