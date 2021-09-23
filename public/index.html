@@ -7,13 +7,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/themes/dark.css">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">    
     <title>Document</title>
 </head>
 <body onload="getTime()">
+    <div class="pure-menu pure-menu-horizontal" style="text-align:center;">
+        <a href="#" class="pure-menu-heading pure-menu-link">Calibration Lab</a>
+        <ul class="pure-menu-list"">
+
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
+            </li>
+        </ul>
+    </div>
+
+    </div>
+    <div class="container">
     <div class="row">
       
-        <a href="/apptlist.html" > List</a>
+       
             <div class="col-lg-6" id="mainCol" >
                 <form action="/test" method="post" id="mainForm">
                 <label>Enter your name: <input type="text" name="userName" placeholder="Enter your name"/></label>
@@ -28,7 +50,7 @@
             </div>
 
     </div>
-   
+</div>
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
