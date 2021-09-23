@@ -15,19 +15,21 @@
     <div class="pure-menu pure-menu-horizontal" style="text-align:center;">
         <a href="#" class="pure-menu-heading pure-menu-link">Calibration Lab</a>
         <ul class="pure-menu-list"">
+            <ul class="pure-menu-list"">
 
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
-            </li>
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
-            </li>
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
-            </li>
-            <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
-            </li>
+                <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
+                </li>
+                <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+                </li>
+                <!-- <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
+                </li> -->
+                <!-- <li class="pure-menu-item">
+                    <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
+                </li> -->
+            </ul>
         </ul>
     </div>
 
@@ -55,7 +57,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
     flatpickr("#labDate",{
-    enableTime: true,
+    enableTime: false,
     dateFormat: "m-d-Y "
 });
 flatpickr("#leaveTime",{

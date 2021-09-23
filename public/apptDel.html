@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+   <link rel="stylesheet" href="style.css">    
+    <title>Document</title>
+</head>
+<body onload="getData('/applist?', setData)">
+    <div class="pure-menu pure-menu-horizontal" style="text-align:center;">
+        <a href="#" class="pure-menu-heading pure-menu-link">Callibration Lab</a>
+        <ul class="pure-menu-list"">
+
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+            </li>
+            <!-- <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
+            </li> -->
+            <!-- <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
+            </li> -->
+        </ul>
+    </div>
+    <div class="container" style="text-align:center;">
+        <table style="border: white solid 2px; border-collapse:collapse;" name="regtable" id='tbl'>
+            <tr style="border: white solid 2px; border-collapse:collapse;">
+                <th id="test">
+                        Name
+                </th>
+                <th >
+                    Date
+                </th>
+                <th>
+                    Start Time
+                </th>
+                <th>
+                    Stop Time
+                </th>
+            </tr>
+        </table>
+        <hr/>
+    <span style="color:black; text-align:center;">Dept 31. Inc.</span>
+    
+    </div>
+    
+</body>
+
+<script>
+    
+    function setData(sets){
+        let data = sets.responseText;
+            let jsonres = JSON.parse(data);   
+        for(let i=0; i<jsonres.length; i++){ 
+           let tbl = document.getElementById('tbl');
+           let trr = document.createElement('tr');// The multiple rows
+           let nameCell = document.createElement('td'); 
+          let dateCell = document.createElement('td');
+          let startCell = document.createElement('td');
+          let stopCell = document.createElement('td');
+           
+            //console.log('break');
+            //console.log(jsonres[i]["name"]);
+           let name = document.createTextNode(jsonres[i]["name"])
+           let dates = document.createTextNode(jsonres[i]['bookDate'].toLocaleString())
+           let start = document.createTextNode(jsonres[i]['startTime'])
+           let stop = document.createTextNode(jsonres[i]['stopTime'])
+        
+           nameCell.appendChild(name);
+           dateCell.appendChild(dates);
+           startCell.appendChild(start);
+           stopCell.appendChild(stop);
+            trr.appendChild(nameCell);
+            trr.appendChild(dateCell);
+            trr.appendChild(startCell);
+            trr.appendChild(stopCell);
+
+            //tbl.appendChild(nameCell);
+           tbl.append(trr);
+           //tbl.appendChild(tdd);
+        }
+          //console.log(sets.body.length)
+         
+    }
+function getData(url, func){
+
+    let xht = new XMLHttpRequest();
+    xht.onreadystatechange = function(){
+        
+        if(this.readyState == 4&& this.status == 200){
+            func(this);
+        }
+    }
+    
+    xht.open('GET',url, true);
+    xht.send();
+   
+}
+
+
+</script>
+</html>

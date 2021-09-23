@@ -1,5 +1,6 @@
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://lee:Gamez2232@cluster0.guc9f.mongodb.net/mainDB?retryWrites=true&w=majority";
+const config = require('configs');
+const uri = config.connString;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const parser = require('body-parser');
 const multer = require('multer');
@@ -16,18 +17,17 @@ app.use(upload.array());
 
 app.use(express.static('public'));
 app.use(function(req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Origin', 'https://lab-booking.herokuapp.com/');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000/applist.html');
+  res.setHeader('Access-Control-Allow-Origin', 'https://lab-booking.herokuapp.com/apptlist.html');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
   next();
-})
+});
 
 
 
 app.get('/', (req, res, next) => {
-  //console.log(collection.find());x`
- //client.close();
+ 
  next();
  });
  
@@ -57,7 +57,7 @@ return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0})
   //  let checks = items[0].bookDate
   // console.log(checks);
   
-    res.send(items)
+    res.json(items)
   
   //res.send(checks[0])
   // items.forEach(res.send(JSON.parse(items)));
@@ -71,25 +71,13 @@ return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0})
       });
     
   });
-      
-        // collection.findOne({}, function(err, result){
-        //   if(err) {console.log(err);}
-        //   if(result){console.log(result);}
-        //   else{console.log("nope");}
-        // });
-      
 
 
-        function formatAMPM(date) {
-          var dates = new Date(date);
-          var options = {
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-          };
-          let timeString = dates.toLocaleString('en-US', options);
-          return timeString;
-        }
+// app.post('/apptDel', (req, res) => {
+//       client.connect(err =>{
+//           collection.deleteOne({_id:req.params.id});
+//       });
+// });
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
       client.connect(err => {
@@ -108,5 +96,5 @@ app.post('/test', (req, res) => {
                                         });
                                         
 app.listen(process.env.PORT||3000, function(){
-console.log('listening on port 3000');
+//console.log('listening on port 3000');
 });
