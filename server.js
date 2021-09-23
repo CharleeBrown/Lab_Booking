@@ -1,5 +1,5 @@
 const { MongoClient } = require('mongodb');
-const config = require('configs');
+const config = require('./configs.js');
 const uri = config.connString;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 const parser = require('body-parser');

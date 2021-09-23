@@ -12,28 +12,26 @@
     <title>Document</title>
 </head>
 <body onload="getTime()">
-    <div class="pure-menu pure-menu-horizontal" style="text-align:center;">
-        <a href="#" class="pure-menu-heading pure-menu-link">Calibration Lab</a>
+    <div class="pure-menu pure-menu-horizontal" style="text-align:center;" id="menuClean">
+        <a href="#" class="pure-menu-heading pure-menu-link">Callibration Lab</a>
+       
         <ul class="pure-menu-list"">
-            <ul class="pure-menu-list"">
 
-                <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
-                </li>
-                <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
-                </li>
-                <!-- <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
-                </li> -->
-                <!-- <li class="pure-menu-item">
-                    <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
-                </li> -->
-            </ul>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
+            </li>
+            <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+            </li>
+            <!-- <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
+            </li> -->
+            <!-- <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
+            </li> -->
         </ul>
     </div>
 
-    </div>
     <div class="container">
     <div class="row">
       
@@ -56,6 +54,31 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
+function checkTime(){
+    let name = document.getElementById('userName');
+    let date = document.getElementById('labDate');
+    let start = document.getElementById('startTime');
+    let leave = document.getElementById('leaveTime');
+    if(name.value == '' || name.value == null )
+    {
+        alert('Please enter a name'); 
+        return false;
+    }
+    else if(date.value == '' || date.value == null){
+        alert('Choose a date'); 
+        return false;
+    }
+    else if(start.value == '' || start.value == null){
+        alert('choose a start time');
+        return false;}
+    else if( leave.value == '' || leave.value == null)
+    {
+     alert('choose a leave time');
+     return false;   
+    }else{
+        return true;
+    }
+}
     flatpickr("#labDate",{
     enableTime: false,
     dateFormat: "m-d-Y "
