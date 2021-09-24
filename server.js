@@ -79,12 +79,12 @@ return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0})
 //       });
 // });
 app.post('/test', (req, res) => {
-  if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!=null){
+  if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!= null){
       client.connect(err => {
         
-               console.log()
+               if(err) throw err;
                 let obj = {name:req.body.userName, 
-                          bookDate:new Date(req.body.dates).toDateString(), 
+                          bookDate:new Date(req.body.dates).toLocaleDateString(), 
                           startTime:req.body.startTime, 
                           stopTime:req.body.leaveTime};
                           console.log(obj.startTime);

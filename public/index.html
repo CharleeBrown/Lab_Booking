@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">    
     <title>Document</title>
 </head>
-<body onload="getTime()">
+<body>
     <div class="pure-menu pure-menu-horizontal" style="text-align:center;" id="menuClean">
         <a href="#" class="pure-menu-heading pure-menu-link">Callibration Lab</a>
        
@@ -54,31 +54,31 @@
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.2.3/flatpickr.js"></script>
 <script>
-function checkTime(){
-    let name = document.getElementById('userName');
-    let date = document.getElementById('labDate');
-    let start = document.getElementById('startTime');
-    let leave = document.getElementById('leaveTime');
-    if(name.value == '' || name.value == null )
-    {
-        alert('Please enter a name'); 
-        return false;
-    }
-    else if(date.value == '' || date.value == null){
-        alert('Choose a date'); 
-        return false;
-    }
-    else if(start.value == '' || start.value == null){
-        alert('choose a start time');
-        return false;}
-    else if( leave.value == '' || leave.value == null)
-    {
-     alert('choose a leave time');
-     return false;   
-    }else{
-        return true;
-    }
-}
+// function checkTime(){
+//     // let name = document.getElementById('userName');
+//     // let date = document.getElementById('labDate');
+//     // let start = document.getElementById('startTime');
+//     // let leave = document.getElementById('leaveTime');
+//     // if(name.value === '' || name.value === null )
+//     // {
+//     //     alert('Please enter a name'); 
+//     //     return false;
+//     // }
+//     // else if(date.value === '' || date.value === null){
+//     //     alert('Choose a date'); 
+//     //     return false;
+//     // }
+//     // else if(start.value === '' || start.value === null){
+//     //     alert('choose a start time');
+//     //     return false;}
+//     // else if( leave.value === '' || leave.value === null)
+//     // {
+//     //  alert('choose a leave time');
+//     //  return false;   
+//     // }else{
+//     //     return true;
+//     // }
+// }
     flatpickr("#labDate",{
     enableTime: false,
     dateFormat: "m-d-Y "
