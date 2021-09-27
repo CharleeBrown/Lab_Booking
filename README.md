@@ -2,3 +2,5 @@
 
 ### The frontend is pure HTML/CSS and the backend was written in Node.js and Express.js. 
 ### The database is MongoDB. 
+
+![alt text](https://github.com/CharleeBrown/Lab_Booking/main/appScreen.jpg?raw=true)
