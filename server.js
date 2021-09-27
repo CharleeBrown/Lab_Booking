@@ -41,28 +41,18 @@ app.get('/', (req, res, next) => {
    
     let nowDate = new Date();
       client.connect( async err=>{
-      //   if(err) throw err;
-      //  collection.find({ name: 'Coleman' });
-      //  res.send('it works');
-      // const projection = {'name'}
+    
         const query = {};
 
-return  collection.find({bookDate:{$gte:nowDate.getDate()}},{name:1, bookDate:0, startTime:0, _id:0}) 
+return  collection.find(query,{name:1, bookDate:0, startTime:0, _id:0}) 
   .sort()
   .toArray()
   .then(items => {
-  //   console.log(`Successfully found ${items.length} documents.`)
-  //   console.log(items[0].bookDate)
-  //  // res.send(items[0].name)
-  //  let checks = items[0].bookDate
-  // console.log(checks);
+
   
     res.json(items)
   
-  //res.send(checks[0])
-  // items.forEach(res.send(JSON.parse(items)));
-  // items.forEach(res.send('<BODY> <h1>' + items[tems]+'</h1></BODY></HTML>'))
-   // res.send('<BODY> <h1>' + items[0].bookDate+'</h1></BODY></HTML>')
+
     
     return items
   })
@@ -72,12 +62,6 @@ return  collection.find({bookDate:{$gte:nowDate.getDate()}},{name:1, bookDate:0,
     
   });
 
-
-// app.post('/apptDel', (req, res) => {
-//       client.connect(err =>{
-//           collection.deleteOne({_id:req.params.id});
-//       });
-// });
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!= null){
       client.connect(err => {
@@ -95,6 +79,4 @@ app.post('/test', (req, res) => {
                                    }
                                         });
                                         
-app.listen(process.env.PORT||3000, function(){
-//console.log('listening on port 3000');
-});
+app.listen(process.env.PORT||3000);
