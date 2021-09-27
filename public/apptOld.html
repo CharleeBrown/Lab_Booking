@@ -6,22 +6,23 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
    <link rel="stylesheet" href="style.css">    
-    <title>Document</title>
+    <title>Lab Booking - Past Bookings</title>
 </head>
-<body onload="getData('/applist?', setData)">
-    <div class="pure-menu pure-menu-horizontal" style="text-align:center;">
+<body onload="getData('/applistOld', setData)">
+    <div class="pure-menu pure-menu-horizontal" style="text-align:center;" id="menuClean">
         <a href="#" class="pure-menu-heading pure-menu-link">Callibration Lab</a>
+       
         <ul class="pure-menu-list"">
 
             <li class="pure-menu-item">
+                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+            </li> <li class="pure-menu-item">
                 <a class="pure-menu-link" href="/apptlist.html" > Booking List</a>
             </li>
+           
             <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/index.html" > Create a Booking </a>
+                <a class="pure-menu-link" href="/apptOld.html" > Past Bookings</a>
             </li>
-            <!-- <li class="pure-menu-item">
-                <a class="pure-menu-link" href="/apptDel.html" > Delete Booking</a>
-            </li> -->
             <!-- <li class="pure-menu-item">
                 <a class="pure-menu-link" href="/apptMod.html" > Modify Booking</a>
             </li> -->
@@ -67,7 +68,7 @@
             //console.log('break');
             //console.log(jsonres[i]["name"]);
            let name = document.createTextNode(jsonres[i]["name"])
-           let dates = document.createTextNode(jsonres[i]['bookDate'].toLocaleString())
+           let dates = document.createTextNode(new Date(jsonres[i]['bookDate']).toDateString())
            let start = document.createTextNode(jsonres[i]['startTime'])
            let stop = document.createTextNode(jsonres[i]['stopTime'])
         
@@ -85,7 +86,15 @@
            //tbl.appendChild(tdd);
         }
           //console.log(sets.body.length)
-         
+          console.log(sets)
+          console.log(data);
+       
+        // document.getElementById('test').innerHTML = sets.response;
+        // console.log(sets)
+        // console.log(sets.response.type);
+        // console.log(sets.responseText);
+        
+
     }
 function getData(url, func){
 
@@ -99,7 +108,16 @@ function getData(url, func){
     
     xht.open('GET',url, true);
     xht.send();
-   
+    // fetch('https://lab-booking.herokuapp.com/applist?')
+    // .then(response => {
+    //     // handle the response
+    //     console.log(response.body);
+    //     let docs = document.getElementById('test'); 
+    //     docs.innerText = response[0].name;
+    // })
+    // .catch(error => {
+    //     // handle the error
+    // });
 }
 
 

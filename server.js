@@ -39,18 +39,21 @@ app.get('/', (req, res, next) => {
 
   app.get('/applist', (req,res) => {
    
-    let nowDate = new Date();
+    let nowDate = new Date().toISOString();
       client.connect( async err=>{
     
-        const query = {};
+        const query = {bookDate:{$gte:nowDate}};
+        console.log(nowDate);
 
-return  collection.find(query,{name:1, bookDate:0, startTime:0, _id:0}) 
+
+return  collection.find(query)
   .sort()
   .toArray()
   .then(items => {
-
-  
-    res.json(items)
+    //console.log(nowDate.toISOString());
+   // items.forEach(console.log);
+    
+    res.json(items);
   
 
     
@@ -62,13 +65,40 @@ return  collection.find(query,{name:1, bookDate:0, startTime:0, _id:0})
     
   });
 
+  app.get('/applistOld', (req,res) => {
+   
+    let nowDate = new Date().toISOString();
+      client.connect( async err=>{
+    
+        const query = {bookDate:{$lt:nowDate}};
+        console.log(nowDate);
+
+
+return  collection.find(query)
+  .sort()
+  .toArray()
+  .then(items => {
+    //console.log(nowDate.toISOString());
+   // items.forEach(console.log);
+    
+    res.json(items);
+  
+
+    
+    return items
+  })
+  .catch(err => console.error(`Failed to find documents: ${err}`))
+          
+      });
+    
+  });
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!= null){
       client.connect(err => {
         
                if(err) throw err;
                 let obj = {name:req.body.userName, 
-                          bookDate:new Date(req.body.dates).toLocaleDateString(), 
+                          bookDate:new Date(req.body.dates).toISOString(), 
                           startTime:req.body.startTime, 
                           stopTime:req.body.leaveTime};
                           console.log(obj.startTime);
