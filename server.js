@@ -39,7 +39,7 @@ app.get('/', (req, res, next) => {
 
   app.get('/applist', (req,res) => {
    
-    
+    let nowDate = new Date();
       client.connect( async err=>{
       //   if(err) throw err;
       //  collection.find({ name: 'Coleman' });
@@ -47,7 +47,7 @@ app.get('/', (req, res, next) => {
       // const projection = {'name'}
         const query = {};
 
-return  collection.find({},{name:1, bookDate:0, startTime:0, _id:0}) 
+return  collection.find({bookDate:{$gte:nowDate.getDate()}},{name:1, bookDate:0, startTime:0, _id:0}) 
   .sort()
   .toArray()
   .then(items => {
