@@ -15,7 +15,10 @@ app.use(parser.json());
 app.use(parser.urlencoded({extended:true}));
 app.use(upload.array());
 
+// Setting the public folder as the root. 
 app.use(express.static('public'));
+
+// Allowing CORS requests.
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'https://lab-booking.herokuapp.com/');
   res.setHeader('Access-Control-Allow-Methods', 'GET');
@@ -25,51 +28,41 @@ app.use(function(req, res, next) {
 });
 
 
-
+// The server starts at the root of the public folder and reads the index file.
 app.get('/', (req, res, next) => {
  
  next();
  });
  
-  
-  app.post('/apptlist.html', (req, res) => {
-    console.log('SUCCESS');
-    });
-
-
+// When the list page is loaded.
   app.get('/applist', (req,res) => {
    
     let nowDate = new Date().toISOString();
       client.connect( async err=>{
-    
+        // The server queries the db for any bookings >= the current date.
         const query = {bookDate:{$gte:nowDate}};
         console.log(nowDate);
 
-
+// The query results are returned and send to the page.
 return  collection.find(query)
   .sort()
   .toArray()
   .then(items => {
-    //console.log(nowDate.toISOString());
-   // items.forEach(console.log);
-    
-    res.json(items);
-  
-
-    
-    return items
+   
+    res.json(items);  
+    return items;
   })
   .catch(err => console.error(`Failed to find documents: ${err}`))
-          
       });
-    
+  client.close();
   });
 
+  // The query results are returned and send to the page as above. 
   app.get('/applistOld', (req,res) => {
    
     let nowDate = new Date().toISOString();
       client.connect( async err=>{
-    
+    // But this query is looking for any bookings older than the current date.
         const query = {bookDate:{$lt:nowDate}};
         console.log(nowDate);
 
@@ -78,24 +71,22 @@ return  collection.find(query)
   .sort()
   .toArray()
   .then(items => {
-    //console.log(nowDate.toISOString());
-   // items.forEach(console.log);
-    
+   
     res.json(items);
-  
-
-    
-    return items
+   
+    return items;
   })
   .catch(err => console.error(`Failed to find documents: ${err}`))
           
       });
-    
+    client.close();
   });
+
+  // When the booking request is submitted.
 app.post('/test', (req, res) => {
   if(req.body.userName != null && req.body.dates != null && req.body.startTime != null && req.body.leaveTime!= null){
       client.connect(err => {
-        
+            // The form data is added to a JSON object and inserted into the database.
                if(err) throw err;
                 let obj = {name:req.body.userName, 
                           bookDate:new Date(req.body.dates).toISOString(), 
