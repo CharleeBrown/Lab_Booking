@@ -93,11 +93,20 @@ app.post('/test', (req, res) => {
                           startTime:req.body.startTime, 
                           stopTime:req.body.leaveTime};
                           console.log(obj.startTime);
+                if((obj.name =="" || obj.name ==null)||(obj.bookDate=="" ||obj.bookDate==null)){
+                  console.log("empty name");
+                  client.close();
+                }
+                else{
                 collection.insertOne(obj);       
                 res.redirect('/apptlist.html');
+                }
                                      });
+                                    
                 client.close();
+                                    
                                    }
-                                        });
+        });
+      
                                         
 app.listen(process.env.PORT||3000);
