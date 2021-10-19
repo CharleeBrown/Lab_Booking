@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-validator": "^6.13.0",
     "flatpickr": "^4.6.9",
     "jshint": "^2.13.1",
     "mongodb": "^4.1.2",
